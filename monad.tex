@@ -1,0 +1,67 @@
+\section{Monad}
+
+\begin{Def}[Monad]
+A monad is a triple $(T, \eta, \mu)$ such that
+\begin{di}{def-M1}
+TA \ar{r}{T \eta_A} \ar[equal]{rd}
+    & T^2A \ar{d}{\mu_A}    
+        & TA \ar[swap]{l}{\eta_{TA}} \ar[equal]{ld}\\
+    & TA
+\end{di}
+and
+\begin{di}{def-M2}
+T^3A \ar{r}{T \mu_A} \ar{d}{\mu_{TA}} & T^2A \ar{d}{\mu_A} \\
+T^2A \ar{r}{\mu_A} & TA
+\end{di}%
+commute. Where $T$, $\eta$ and $\mu$ are an endfunctor, an unit and a multiplication resly. Often $(T, \eta, \mu)$ is denoted simply by $T$.
+\end{Def}  
+The definiton \eqref{di:def-M1} and \eqref{di:def-M2} are called the \textit{monad laws}.
+
+\begin{Eg}[Exception] 
+
+\todo{Exception monad of Mogi91}
+In $\Sets$, 
+\begin{di}{aa}
+A \ar{r}{\eta_A} \ar{rd}{f} & TA \ar{rd}{Tf} 
+    & T^2A \\
+B \ar{rd}{g}                & TB
+    & T^2B \ar[bend left]{l}{\mu_B} \\
+C  & TC                     
+    & T^2C \ar[bend left]{l}{\mu_C} \\
+\end{di}
+
+\end{Eg}
+
+\subsection{Klaisli Category}
+A $\Kl{T}$ with an endfunctor monad  $T : \C \to \C $ with a triple $ ( T, \eta, -* ) $ is a category s.t. 
+
+\dieq*{\Kl{T}}[\quad\quad\quad\quad\quad]{\C}
+\dieq{\tcd{A_T \ar{d}{1_{A_T}} \\ A_T}}
+[\text{in }\Kl{T}\text{ is }]{\tcd{A \ar{r}{\eta_A} \& TA} \text{in}\, \C.
+}Similaly, 
+\dieq{\tcd{A_T \ar{d}{f_T}  \\ B_T}}
+[\text{is}]{\tcd{A \ar{rd}{f} \& \\ \& TB},}
+\dieq{\tcd{A_T \ar[gray]{d}{f} \ar[bend right]{dd}[swap]{g_T \circ_T f_T} \\ 
+{\color{gray}B_T} \ar[gray]{d}{g} \\ C_T}}
+[\text{is}]{\tcd{A \ar[gray,swap]{d}{f^*} \ar{rdd}{g^* \circ f} \\ 
+{\color{gray}B} \ar[gray,swap]{rd}{g} \\
+\& TC},}
+where `$*$` is defined by 
+\begin{di*}
+TA \ar[swap]{d}{f^*} \ar{rd}{Tf} \\
+TB                        & T^2B \ar[bend left]{l}{\mu_B} 
+\end{di*}
+commuted.
+
+\subsection{T-Algebra}
+\[\begin{tikzcd}
+A \ar{r}{\eta_A} \ar[equal]{rd} & TA \ar{d}{\alpha} \\
+                                & A
+\end{tikzcd}\]
+
+\[\begin{tikzcd}
+T^2A \ar{r}{T \alpha} \ar{d}{\mu_A} & TA \ar{d}{\alpha} \\
+TA \ar{r}{\alpha} & A
+\end{tikzcd}\]
+
+

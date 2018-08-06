@@ -1,0 +1,86 @@
+\section{Effectus}
+
+\subsection{PCM}
+
+
+
+\cite{Jac15}
+In $\ctSets$,
+\tce{1 \ar{r}{\omega} \& A \ar{r}{p} \& 1+1}[.]
+is in $\opposite{\ctSets}$,
+\tce*{1 \& A \ar{l}{\omega^*} \& 1 \times 1 \ar{l}{p^*}}[.]
+More concretely, 
+AAA\tcd{A \ar{d}{f} \\ B}ZZZ 
+
+
+
+\begin{Def}{Bayes Update} 
+\begin{equation}
+    I_{n+1} := lik \sslash t_{n+1}  \gg I_{n}
+\end{equation}
+\end{Def}
+
+\begin{Def}{D}
+$\fr{D} : \ctSets \to \ctSets $
+%\todoFill{}
+\end{Def}
+
+\begin{Eg}(Cf. \cite{JZ16}, Sec.3)
+Consider an $\Kl{\mathcal{D}}$-arrow
+
+\tce{1 \ar{r}{\omega} \& 
+    2_D \ar{r}{s} \& 
+    2_T \ar{r}{T} \& 
+    {[0,1]}}
+where 
+\equ{2_D := \{d, d^\bot\}}[,]
+\equ{2_T := \{t, t^\bot\}}[.]
+and
+
+
+\equ{\fr{D}[X] := \{ {\sum}_j r_j \ket{x_j} | r_j \in [0,1], {\sum}_j r_j = 1, x_j \in X \} } 
+\end{Eg}
+\Fix{Stretch the curly braces and the bar}
+
+
+
+
+
+
+\subsection{$C^*$-Algebra}
+
+\begin{Def}A $*$-algebra (cf. \parencite[Sec.\todoFill{}]{Jac15}) $A$ is a vector space over $\Bbb{C} $ $(|A|, \cdot, \vb{1}, \norm{-}, -^*)$ s.t. for all $a,b \in A$, $\norm{a}^2 = a^* \cdot a$ and $\norm{a \cdot b} \leq \norm{a}\norm{b}$.
+\end{Def}
+
+\begin{Eg} $\Bbb{C}$. Let $|\Bbb{C}| \coloneqq{} \{a+bi | a,b \in \Bbb{R} \} $ and for all $z,z' \in |\Bbb{C}|$,
+
+\begin{alignat*}{2}
+z^*         \coloneqq{}& \Re{z} - \Im{z}i, \\
+\norm{z}    \coloneqq{}& \sqrt{\Re{z}^2 + \Im{z}^2}, \\
+z \cdot z'  \coloneqq{}& zz', \\
+\vb{1}      \coloneqq{}& 1.
+\end{alignat*}
+$\Bbb{C} = (|\Bbb{C}|, \cdot, \vb{1}, \norm{-}, -^*)$
+\end{Eg}
+
+\begin{Def}A $C^*$-algebra (cf. \parencite[Sec.\todoFill{}]{Jac15}) $A$ is a vector space over $\Bbb{C} $ $(|A|, \cdot, 1, \norm{-}, -^*)$ s.t. for all $a,b \in A$, $\norm{a}^2 = a^* \cdot a$ and $\norm{a \cdot b} \leq \norm{a}\norm{b}$.
+\end{Def}
+
+\begin{alignat}{5}
+&\text{(M)}\colon& a\cdot b  && \stackrel{f}{\longmapsto}    && f(a) \cdot' f(b)) \label{eq:starM}\\
+&\text{(U)}\colon& 1         && \stackrel{f}{\longmapsto}    && 1' \label{eq:starU}\\
+&\text{(I)}\colon& f(a^*)    && =                            && f(a)^* \label{eq:starI}\\
+&\text{(P)}\colon&&&&& f(a) \geq 0' \label{starP}
+\end{alignat}
+
+\section{Optimization Theory}
+\begin{Def}
+Optima is $\mathcal{D}O$
+\end{Def}
+\begin{Def}
+The local optima indicators are $\bot, \curlyvee$, and $\partial$.
+\end{Def}
+
+\begin{Lem}
+Optimal of a convex function on a convex space is a \curlyvee 
+\end{Lem}

@@ -1,0 +1,193 @@
+\title{Bayes decision interacted with quantum probability: An optimal control of irrational agents}
+
+\author{Satoru Takashimizu}
+
+% \documentclass[a4paper, 20pt]{extarticle}
+% \documentclass[final, twocolumn]{article}
+%\documentclass[a4paper, twocolumn, 20pt]{extarticle}
+%\documentclass[a4paper, twocolumn, 17pt]{extarticle}
+%\documentclass[a4paper, twocolumn, 15pt]{extarticle}
+
+%\documentclass[a4paper, 16pt]{extarticle}
+\documentclass[a4paper, 17pt]{extarticle}
+
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage[prependcaption, colorinlistoftodos, textsize=small, textwidth=4.0cm]{todonotes}
+\setlength{\marginparwidth}{4.0cm}
+%\usepackage[tiny]{titlesec}
+%\usepackage[small]{titlesec}
+%\usepackage[medium]{titlesec}
+\usepackage{xifthen}
+
+
+%\usepackage{graphicx}
+\usepackage{tikz-cd, mathrsfs}
+
+\usepackage[nohead, nofoot]{geometry}
+\usepackage{xparse, soul, color, amsmath, amsthm, amssymb, physics, stmaryrd}
+
+\usetikzlibrary{arrows}
+\usepackage{tikz}
+
+\numberwithin{equation}{section}
+\usepackage{mathtools}
+%\usepackage{xargs}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\geometry{
+% paperheight=330mm 
+ a4paper,
+ left=2mm,
+% right=80mm,
+ right=45mm,
+ top=30mm,
+ bottom=15mm
+}
+
+\newcommand{\Kl}[1]{\mathrlap{\mathcal{K}} \, \, \, \, \ell (#1)}
+
+\newcommand{\ctSets}{\mathbf{Sets}}
+\newcommand{\ctMon}{\mathbf{Mon}}
+\newcommand{\ctBA}{\mathbf{BA}}
+\newcommand{\ctGrp}{\mathbf{Grp}}
+
+\newcommand{\ctC}{\mathscr{C}}
+\newcommand{\ctD}{\mathscr{D}}
+
+\newcommand\setOf[1]{\ensuremath{\Bbb{#1}}}
+
+\NewDocumentCommand{\Ct}{m o}
+{\ensuremath{\mathbf{#1}\IfValueT{#2}{(#2)}}}
+
+\NewDocumentCommand{\ct}{m o}
+{\mathscr{#1}\IfValueT{#2}{(#2)}}
+
+\NewDocumentCommand{\fr}{m o}
+{\mathcal{#1}\IfValueT{#2}{(#2)}}
+
+
+\newcommand{\opposite}[1]{\mathbf{#1}^\mathrm{op}}
+
+\usepackage[footnotes,definitionLists,hashEnumerators,smartEllipses,hybrid]{markdown}
+
+
+% https://tex.stackexchange.com/questions/126711/
+%\newcommand{\sslash}{\mathbin{/\mkern-6mu/}}
+
+
+\newtheorem{Th}{Theorem}[section]
+\newtheorem{Lem}{Lemma}[section]
+\newtheorem{Claim}{Claim}[section]
+\theoremstyle{definition}
+\newtheorem{Def}{Definition}[section]
+\newtheorem{Eg}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}[section]
+
+\newenvironment{di*}[1][]
+{\[\begin{tikzcd}[#1]}
+{\end{tikzcd}\]}
+
+\newenvironment{di}[2][]
+{\begin{equation}\begin{tikzcd}[#1]\label{di:#2}}
+{\end{tikzcd}\end{equation}}
+%\NewDocumentEnvironment{di}{O{} o}
+%{\begin{equation}\begin{tikzcd}[#1]\IfNoValueT{#2}{\label{di:#2}}}
+%{\end{tikzcd}\end{equation}}
+
+\newcommand{\hlcyan}[1]{{\sethlcolor{cyan}\hl{#1}}}
+
+\NewDocumentCommand{\todoFill}{o}{%
+  \IfValueTF{#1}{%
+  {\sethlcolor{green}\hl{#1}} %
+  \todo[color=green]{Fill: #1}%
+  }{%
+  {\sethlcolor{green}\hl{(FILL)}} %
+  \todo[color=green]{Fill}%
+  }}
+
+\newcommand{\todoEng}[1]{%
+\ifthenelse{\isempty{#1}}{%
+{\color{red}{(FILL)}}\addcontentsline{tdo}{todo}{Fill there}%
+}{%
+{\color{red}{(FILL: #1)}}\addcontentsline{tdo}{todo}{Fill there: #1}%
+}}
+
+\newcounter{todoListItems}
+\newcommand{\todoLinked}[3][]{
+\addtocounter{todoListItems}{1}
+\todo[caption={\protect\hypertarget{todo\thetodoListItems}{}#2}, #1]
+{#3\hfill \hyperlink{todo\thetodoListItems}{$\uparrow$}}}
+
+%\newcommand{\todoFix}[2][fancyline, color=green]{\todoLinked[#2]{Fix}{#2}}
+%\newcommand{\todoFilll}[2][fancyline, color=orange]{\todoLinked[#1]{CAP}{#2}}
+
+\NewDocumentCommand{\Fix}{O{} m}{%
+\todoLinked[noprepend, color=yellow, #1]{Fix: #2}{#2}}
+
+\NewDocumentCommand{\memo}{O{} O{} m}{%
+\todoLinked[inline, noprepend, color=yellow, #1]{Memo: #2}{%
+\begin{minipage}{0.9\linewidth}#3\end{minipage}}}
+
+\NewDocumentCommand{\todoTemp}{m m m o o}{%
+    \ifthenelse{\isempty{#4}}{{\setulcolor{#3}\ul{#1}}}{}%
+    \todoLinked[color=#3, fancyline]{#2}{#5}}
+
+%\NewDocumentCommand{\todoT}{o o}{%
+%    \todoTemp{(FILL)}{Fill}{red}[#1][#2]}
+
+\usepackage{multicol}
+
+\newcommand{\tcd}[2][]{
+\begin{tikzcd}[ampersand replacement=\&, #1]
+#2
+\end{tikzcd}}
+
+\usepackage{tabularx}
+
+\tikzset{
+  no line/.style={draw=none,
+    commutative diagrams/every label/.append style={/tikz/auto=false}}}
+
+% https://tex.stackexchange.com/questions/187444
+\newcommand{\nospacepunct}[1]{\makebox[0pt][l]{\,#1}}
+
+\usepackage{luacode}
+
+\newcommand{\adj}[1]{%
+\rotatebox[origin=c]{\luadirect{tex.print(180 + #1)}}{$\vdash$}}
+
+
+\input{def1.tex}
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+
+\input{linear.tex}
+
+\listoftodos[(Todos)]
+\tableofcontents\label{toc}
+
+%\input{cat.tex}
+%\input{effectus.tex}
+
+\printbibliography
+\appendix
+%\input{monad.tex}
+
+%\input{bool.tex}
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
